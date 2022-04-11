@@ -22,14 +22,10 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class TextTranslator implements TextHandler {
 
-    public void userTranslate(User user){
+    public void userTranslate(User user) {
         user.setGender(user.getGender().equals(Constants.BOY.getName()) ? Constants.SUDAR_MALE.getName() : Constants.SUDAR_FEMALE.getName());
-
-        user.setName(user.getName().equals("") ? "" : (user.getName().matches("[^a-zA-Z]*") ?
-                getTranslation(user.getName()) : user.getName()));
-
-        user.setDescription(user.getDescription().matches("[^a-zA-Z]*") ?
-                getTranslation(user.getDescription()) : user.getDescription());
+        user.setName(getTranslation(user.getName()));
+        user.setDescription(getTranslation(user.getDescription()));
     }
 
     public String getTranslation(String text) {

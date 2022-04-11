@@ -79,7 +79,6 @@ public class UserService {
         return userSearch;
     }
 
-
     public void saveLover(User user) {
         translateGenderAndPreference(user);
         userRepository.save(user);

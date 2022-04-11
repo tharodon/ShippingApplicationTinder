@@ -163,9 +163,13 @@ public class BotMassage extends SpringWebhookBot {
         BotApiMethod<?> form = getUserFormAfterReload(update, text);
         if (form != null) return form;
         if (update.getMessage().getText().equals(Commands.CONTINUE.getName())) {
-            form = messageServiceImpl.getContinue(update.getMessage().getFrom().getId(), userState);
-            getPhoto(update);
-            return form;
+            try {
+                form = messageServiceImpl.getContinue(update.getMessage().getFrom().getId(), userState);
+                getPhoto(update);
+                return form;
+            } catch (RuntimeException e) {
+                return new SendMessage(idUser.toString(), "Вам необходимо создать анкету.");
+            }
         } else if (update.getMessage().getText().equals(Commands.START.getName()) ||
                 userState.getBotState().equals(BotState.CREATING_STATE)) {
             userState.setId(idUser);
