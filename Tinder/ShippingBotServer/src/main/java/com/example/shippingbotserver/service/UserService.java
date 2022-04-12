@@ -131,7 +131,7 @@ public class UserService {
 
     private void translateGenderAndPreference(User user) {
         if (user.getGender() != null) {
-            if (user.getGender().equals(Constants.SUDAR_MALE.getName()) || user.getGender().equals(Constants.BOY.getName())) {
+            if (user.getGender().toLowerCase(Locale.ROOT).equals(Constants.SUDAR_MALE.getName()) || user.getGender().equals(Constants.BOY.getName())) {
                 user.setGender(Constants.BOY.getName());
             } else {
                 user.setGender(Constants.GIRL.getName());

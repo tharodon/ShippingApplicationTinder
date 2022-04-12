@@ -46,6 +46,7 @@ public class ChangeServiceImpl implements ChangeService {
     }
 
     public BotApiMethod<?> getChangeNameSecondStage(Long longId, UserState userState) {
+
         userState.setBotState(BotState.CHANGE_NAME);
         SendMessage sendMessage = new SendMessage(longId.toString(), "Как вас зовут?");
         sendMessage.setReplyMarkup(new ReplyKeyboardRemove(true));
@@ -84,6 +85,7 @@ public class ChangeServiceImpl implements ChangeService {
                     (Arrays.asList(MenuButton.FORM_BUTTON, MenuButton.SEARCH_BUTTON, MenuButton.FAVORITE_BUTTON)));
             return sendMessage;
         } else {
+            userState.setBotState(BotState.CHANGE_GENDER);
             return new SendMessage(message.getFrom().getId().toString(),
                     "Доступно:\n" + Gender.FEMALE.getName() + "\n" + Gender.MALE.getName());
         }
@@ -103,10 +105,10 @@ public class ChangeServiceImpl implements ChangeService {
                     (Arrays.asList(MenuButton.FORM_BUTTON, MenuButton.SEARCH_BUTTON, MenuButton.FAVORITE_BUTTON)));
             return sendMessage;
         } else {
-
+            userState.setBotState(BotState.CHANGE_NAME);
             SendMessage sendMessage = new SendMessage(message.getFrom().getId().toString(), "Имя не может быть длиннее 25 символов.");
             sendMessage.setReplyMarkup(replyKeyboardMaker.getKeyboard
-                    (Arrays.asList(MenuButton.FORM_BUTTON, MenuButton.SEARCH_BUTTON, MenuButton.FAVORITE_BUTTON)));
+                    (Arrays.asList(MenuButton.MENU_BUTTON)));
             return sendMessage;
         }
     }
@@ -125,10 +127,11 @@ public class ChangeServiceImpl implements ChangeService {
                     (Arrays.asList(MenuButton.FORM_BUTTON, MenuButton.SEARCH_BUTTON, MenuButton.FAVORITE_BUTTON)));
             return sendMessage;
         } else {
+            userState.setBotState(BotState.CHANGE_DESCRIPTION);
             SendMessage sendMessage = new SendMessage(message.getFrom().getId().toString(), "Описание не может быть длиннее 420 символов" +
                     ".");
             sendMessage.setReplyMarkup(replyKeyboardMaker.getKeyboard
-                    (Arrays.asList(MenuButton.FORM_BUTTON, MenuButton.SEARCH_BUTTON, MenuButton.FAVORITE_BUTTON)));
+                    (Arrays.asList(MenuButton.MENU_BUTTON)));
             return sendMessage;
         }
     }
@@ -147,6 +150,7 @@ public class ChangeServiceImpl implements ChangeService {
                     (Arrays.asList(MenuButton.FORM_BUTTON, MenuButton.SEARCH_BUTTON, MenuButton.FAVORITE_BUTTON)));
             return sendMessage;
         } else {
+            userState.setBotState(BotState.CHANGE_PREFERENCE);
             return new SendMessage(message.getFrom().getId().toString(),
                     "Доступно:\n" + Preferences.ALL_AIM.getName() + "\n"
                             + Preferences.FEMALE_AIM.getName() + "\n" + Preferences.MALE_AIM.getName());
