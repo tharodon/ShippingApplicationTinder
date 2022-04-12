@@ -1,0 +1,13 @@
+telegram:
+  api-url: "https://api.telegram.org/"
+  webhook-path: "${WEB_HOOK_PATH}"
+  bot-name: "${NAME:ShippingShippingShippingbot}"
+  bot-token: "${BOT_TOKEN}"
+  host-url: "http://localhost:8686/server/user/"
+spring:
+  #    host: "<...>.compute-1.amazonaws.com"
+  port: "8080"
+  #    password:
+  ssl: true
+server:
+  port: "8080"
